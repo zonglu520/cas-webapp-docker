@@ -14,34 +14,15 @@ RUN set -x; \
     java_hash=1931ed3beedee0b16fb7fd37e069b162; \
     
     cd / \
-    && wget http://cdn.azul.com/zulu/bin/zulu$zulu_version-jdk$java_version-linux_x64.tar.gz \
     && echo "$java_hash  zulu$zulu_version-jdk$java_version-linux_x64.tar.gz" | md5sum -c - \
     && tar -zxvf zulu$zulu_version-jdk$java_version-linux_x64.tar.gz -C /opt \
     && rm zulu$zulu_version-jdk$java_version-linux_x64.tar.gz \
     && ln -s /opt/zulu$zulu_version-jdk$java_version-linux_x64/jre/ /opt/jre-home;
 
 RUN cd / \
-	&& wget http://cdn.azul.com/zcek/bin/ZuluJCEPolicies.zip \
     && unzip ZuluJCEPolicies.zip \
     && mv -f ZuluJCEPolicies/*.jar /opt/jre-home/lib/security \
     && rm ZuluJCEPolicies.zip; 
-
-
-# Set up Oracle Java properties
-# RUN set -x; \
-#     java_version=8u112; \
-#     java_bnumber=15; \
-#     java_semver=1.8.0_112; \
-#     java_hash=eb51dc02c1607be94249dc28b0223be3712b618ef72f48d3e2bfd2645db8b91a; \
-
-# # Download Oracle Java, verify the hash, and install \
-#     cd / \
-#     && wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-#     http://download.oracle.com/otn-pub/java/jdk/$java_version-b$java_bnumber/server-jre-$java_version-linux-x64.tar.gz \
-#     && echo "$java_hash  server-jre-$java_version-linux-x64.tar.gz" | sha256sum -c - \
-#     && tar -zxvf server-jre-$java_version-linux-x64.tar.gz -C /opt \
-#     && rm server-jre-$java_version-linux-x64.tar.gz \
-#     && ln -s /opt/jdk$java_semver/ /opt/jre-home;
 
 # Download the CAS overlay project \
 RUN cd / \
