@@ -1,6 +1,6 @@
 FROM centos:centos7
 
-MAINTAINER Apereo Foundation
+MAINTAINER Steedos Foundation
 
 ENV PATH=$PATH:$JRE_HOME/bin
 
