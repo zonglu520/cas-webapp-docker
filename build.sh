@@ -10,10 +10,7 @@ fi
 if [ ! -z "$cas_version" ]
   then
   	echo "Build CAS docker image tagged as v$cas_version"
-	docker build  --no-cache=true -t steedos/cas:v$cas_version .
+	docker build --tag="steedos/cas:v$cas_version" . && echo "Built CAS image successfully tagged as v$cas_version" && docker images "steedos/cas:v$cas_version"
   else
   	echo "No image tag is provided."	
 fi
-
-
--t steedos/apps:$STEEDOS_VERSION .
