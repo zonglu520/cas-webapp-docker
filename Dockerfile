@@ -8,19 +8,21 @@ RUN yum -y install wget tar unzip git \
     && yum -y clean all
 
 # Download Azul Java, verify the hash, and install \
-# RUN set -x; \
-#     java_version=8.0.131; \
-#     zulu_version=8.21.0.1; \
-#     java_hash=1931ed3beedee0b16fb7fd37e069b162; \
+RUN set -x; \
+    java_version=8.0.131; \
+    zulu_version=8.21.0.1; \
+    java_hash=1931ed3beedee0b16fb7fd37e069b162; \
     
-#    cd / \
-#     && echo "$java_hash  zulu$zulu_version-jdk$java_version-linux_x64.tar.gz" | md5sum -c - \
-#     && tar -zxvf zulu$zulu_version-jdk$java_version-linux_x64.tar.gz -C /opt \
-#     && ln -s /opt/zulu$zulu_version-jdk$java_version-linux_x64/jre/ /opt/jre-home;
+    cd / \
+    && wget http://cdn.azul.com/zulu/bin/zulu$zulu_version-jdk$java_version-linux_x64.tar.gz \
+    && echo "$java_hash  zulu$zulu_version-jdk$java_version-linux_x64.tar.gz" | md5sum -c - \
+    && tar -zxvf zulu$zulu_version-jdk$java_version-linux_x64.tar.gz -C /opt \
+    && ln -s /opt/zulu$zulu_version-jdk$java_version-linux_x64/jre/ /opt/jre-home;
 
-# RUN cd / \
-#     && unzip ZuluJCEPolicies.zip \
-#     && mv -f ZuluJCEPolicies/*.jar /opt/jre-home/lib/security \
+RUN cd / \
+    && wget http://cdn.azul.com/zcek/bin/ZuluJCEPolicies.zip \
+    && unzip ZuluJCEPolicies.zip \
+    && mv -f ZuluJCEPolicies/*.jar /opt/jre-home/lib/security \
 
 # Download the CAS overlay project \
 RUN cd / \
