@@ -1,4 +1,4 @@
-description = "Steedos Cenrtal Authentication Service"
+description = "Apereo Cenrtal Authentication Service"
 
 allprojects {
     apply plugin: 'java'
